@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>About</title>
+ <link href="static/css/scrolling-nav.css" rel="stylesheet">
+
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- Custom styles for this template -->
+  
+  <link rel="icon" href="https://i.ibb.co/RSh7ZrF/logo-2.png">
+  
+  <style type="text/css">
+    .navbar-collapse.in {
+    display: block !important;}
+
+    #readme {font-size: 25px;}
+
+  </style>
+
+</head>
+
+<body id="page-top">
+
+ <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">SmartFeed.ai</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+            <span class="sr-only">(current)</span>
+          </li>
+          {% if "logged_in" in session and  session["logged_in"]==True  %}
+           <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+
+
+           {%else%}
+           <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+          </li>
+           
+            {% endif %}
+          
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h2>About</h2>
+
+      
+    </div>
+  </header>
+
+  <section id="readme">
+    <div class="container">
+     
+
+
+<h1 id="problemstatement"><strong>Context</strong></h1>
+<br>
+<p>Reading regularly is one of those habits like meditation which we have a hard time sticking to, having subscribed to ton of news letters flooding our inbox with unrelated article's or about the topic which we have already exhaustively searched on the internet for, <em>Scarcity of information is as bad as Excess of it</em></p>
+
+<p>Though there are implicit feedback mechanism on website based on your read-time and others interaction to filter out personalized content, Wouldn't it be nice to have ubiquitous service/platform where we can explicitly tell a service the type of content their recommendations for us should reflect and have these delivered the very next day</p>
+
+<p>This Project is an attempt addressing this.</p>
+<hr>
+<br>
+<h1 id="introduction"><strong>Introduction</strong></h1>
+<br>
+<p><strong>SmartFeed.ai</strong> is a Content Recommendation Engine, Which serves user's everyday with a collection of Article's related to Topics you have subscribed, 5 Articles per topic.</p>
+
+<p>What makes it smart is, The way it comes up with those 5 articles with the objective to ensure to keep you reading feed interesting(for you), relevant and worthwhile by aligning them to your preferences based on the explicit feedback given by the you(the user).</p>
+<br>
+<h2 id="characteristicsofthese5fivearticles">Characteristics of these 5 five article's</h2>
+<br>
+<p>Article's are divided based on two factors Freshness and Similarity</p>
+
+<p><strong>Freshness</strong> : </p>
+
+<ul>
+<li><p>There are two categories of articles you get for each tag,/topic Archive edition and Daily-edition </p></li>
+
+<li><p>Archive Edition is a collection of all articles for a tag from past two years</p></li>
+
+<li><p>Daily Edition is a collection of articles for a tag from previous day</p></li>
+</ul>
+
+<p><strong>Similarity:</strong>  </p>
+
+<ul>
+<li><p>Based on the Articles user has liked we have <strong>Parallel articles</strong> and <strong>Perpendicular Articles</strong> </p></li>
+
+<li><p>Parallel articles are the one's which are most similar to the articles you have liked</p></li>
+
+<li><p>Perpendicular articles are the one's which are most dissimilar articles from which you have liked</p></li>
+</ul>
+
+
+<p>Following are the distribution of number of articles over the categories </p>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Parallel</th>
+    <th>Perpendicular</th>
+  </tr>
+  <tr>
+    <td><strong>Archive-Edition</strong></td>
+    <td> 1</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><strong>Daily-Edition</strong></td>
+    <td>2</td>
+    <td>1</td>
+  </tr>
+
+</table>
+
+<br>
+
+<strong>Note</strong> 
+<ul>
+  <li>The reason we have concept of perpendicular articles is to introduce novelty or diversify your exposure to different topics, failing to do so may lead to a echo chamber of preference</li>
+
+  <li>If you're wondering about the names(parallel and perpendicular), They have to do with the fact that similarity is being calculated based on the cosine angle between the feature vectors of the articles(You can find out more about technicalities of the project on my <a href="https://github.com/smartfeed"> Github Repository </a>)
+</li>
+
+</ul>
+
+<hr>
+<br>
+<h1 id="howtouse"><strong>How to use</strong></h1>
+<br>
+<ol>
+<li><p>Signup to smartfeed.ai here</p></li>
+
+<li><p>Subscribe to the topics,(<em>Highly recommended to limit it to no more than 3 Topics ,as more than 15 articles a day just feels overwhelming</em>)</p></li>
+
+<li><p>You would be receiving an email with an invitation to join the slack channel(make sure to use the same username used to subscribe), This is the medium chosen to get explicit feedback from the you(the user), After which you have successfully subscribed to smartfeed</p></li>
+
+
+<p><img src="https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905059089_rsz_slack_subs.jpg" alt="img" /></p>
+
+
+<li>Everyday you would be receiving your feed as an email around 6:30(IST) in the morning from <a href="mailto:smartfeed.ai@gmail.com">smartfeed.ai@gmail.com</a>, which will have your feed of the day</li>
+
+
+<p><img src="https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905071506_rsz_email.jpg" alt="img" /></p>
+
+<p>300 word Summary and keywords of the corresponding article are intended to assist you in deciding whether to open the article or skip it</p>
+
+<br>
+
+<li>If you come across an article which you liked reading(it can be from the feed sent to you  or anywhere on the internet) and would want your feed to reflect this type of content then you can add the link to “favored” channel on slack(sounds like quite a hassle to open slack and paste url but as you can se below it's not )</li>
+
+<p><img src="https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905080083_pjimage.jpg" alt="img" /></p>
+
+<p>Almost anywhere on your mobile device (given slack is downloaded), share option is available</p>
+
+
+     </div>
+   </section>
+
+
+
+   
+</body>
+
+</html>

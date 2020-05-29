@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Login</title>
+  <!-- Bootstrap core CSS -->
+  <link href="static/css/scrolling-nav.css" rel="stylesheet">
+
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- Custom styles for this template -->
+  
+  <link rel="icon" href="https://i.ibb.co/RSh7ZrF/logo-2.png">
+  
+  <style type="text/css">
+    .navbar-collapse.in {
+    display: block !important;
+}
+  </style>
+
+</head>
+
+<body id="page-top">
+
+
+ <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">SmartFeed.ai</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home
+            
+
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+          <span class="sr-only">(current)</span>
+        </li>
+                  {% if "logged_in" in session and  session["logged_in"]==True  %}
+           <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+
+
+           {%else%}
+           <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+          </li>
+           
+            {% endif %}
+        
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+  <header class="bg-primary text-white">
+
+    <div class="container text-center">
+     
+      <h2>Login</h2>
+      {% with messages = get_flashed_messages() %}
+     {% if messages %}
+        {% for message in messages %}
+          <strong> {{ message }} </strong>
+        {% endfor %}
+     {% endif %}
+  {% endwith %}
+
+      
+    </div>
+  </header>
+
+
+
+  <section>
+
+    <div class="container">
+
+
+      <div class="row"> 
+
+
+        <div class="col">
+
+
+
+<form method="POST" action="/login">
+
+  <label for="inputEmail4">Email</label>
+    <input type="email" id="defaultLoginFormEmail" name='email' class="form-control mb-4" placeholder="">
+
+    <label for="inputPassword4">Password</label>
+    <input type="password" id="defaultLoginFormPassword" name='password' class="form-control mb-4" placeholder="">
+
+    
+
+    <button class="btn btn-primary" type="submit">Log in</button>
+
+
+</form>
+<br><br>
+<form method="GET" action="/forgotPassword">
+
+<button class="btn btn-primary">Forgot Password</button>
+
+</form>
+      </div>
+  </div>
+  </section>
+
+  
+</body>
+
+</html>
