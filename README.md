@@ -11,6 +11,8 @@
 - [Navigating Code](#navigating-code)
 - [Further Improvements](#further-improvements)
 
+<hr>
+
 # **Problem Statement**
 
 *Scarcity of information is as bad as Excess of it* 
@@ -22,6 +24,8 @@
 Though there are implicit feedback mechanism on Reading Website Which based on your read-time and others interaction  filter out personalized content for you, Wouldn't it be nice to have ubiquitous service/platform where we can explicitly tell a service the type of content their recommendations for us should reflect and have these delivered the very next day
 
 This  project is an attempt addressing this.
+
+<hr>
 
 # **Introduction** 
 
@@ -68,6 +72,8 @@ Following are the distribution of number of articles over the categories
 
 **Note** The reason we have concept of perpendicular articles is to introduce novelty or diversify our exposure to different topics, failing to do so may lead to a echo chamber of preference.
 
+<hr>
+
 # **How to use Platform**
 
 1. Signup to smartfeed.ai [here](https://smartfeed-ai.herokuapp.com/signup)
@@ -100,7 +106,9 @@ Following are the distribution of number of articles over the categories
 
 Any where in your phone given slack is downloaded share option can be accessed  from gmail, chrome, WhatsApp
 
-# **Methodology**
+<hr>
+
+# Methodology
 
 There are 4 components of our system
 
@@ -189,6 +197,8 @@ Perpend_Article_rank = (1-cosin_sim))*0.8+ClapRespScore*0.2
 - Store Feedback from users 
 - As log of articles being sent to user each day(for further analysis)
 
+<hr>
+
 # Navigating Code
 
 On higher level chronological order to replicate the workflow reflects the chronology of the Directories
@@ -229,6 +239,8 @@ Archive Articles are scrapped , trained once before deploying the model (updated
 
 - 4_FlaskApp: Consists of Web interface for users to singup and subscribe to topics of choice
 
+<hr>
+
 # **Further Improvements**
 
 - Currently Articles are being scraped only from medium, In future other regularly updated RSS feeds can be added
@@ -247,3 +259,5 @@ Archive Articles are scrapped , trained once before deploying the model (updated
 - Instead of just using explicit feedback in form of article url's, user can be allowed to post other form of content(You-tube Search history or web search history) from which latent features can be extracted and transformed to our vector space to enhance recommendations
 
 - Apart from the accuracy of our LDA model we can track the emails sent to user to identify his/her relative user interaction with recommended articles, this could be a good KPI(key performance indicator)
+
+<hr>
