@@ -7,7 +7,7 @@ feedfinder2==0.0.4
 feedparser==5.2.1
 gcloud==0.17.0
 googleapis-common-protos==1.51.0
-httplib2==0.18.1
+httplib2==0.18.0
 idna==2.9
 jieba3k==0.35.1
 joblib==0.15.1
