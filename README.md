@@ -1,4 +1,5 @@
 <img src="images/logo-2.png">
+
 # **SmartFeed.ai**
 
  *[Content Recommendation System](https://smartfeed-ai.herokuapp.com/)*
