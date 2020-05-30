@@ -29,13 +29,13 @@ This  project is an attempt addressing this.
 
 # **Introduction** 
 
-**SmartFeed.ai** is a Article  Recommendation System, Which serves you everyday with a collection of Article's related to Topics you have subscribed,(5 Articles per topic).
+**SmartFeed.ai** is a Article  Recommendation System, which serves you everyday with a collection of articles related to Topics you have subscribed,(5 Articles per topic).
 
 The way it comes up with those 5 articles is with the objective too ensure keeping you reading feed interesting and worthwhile by aligning them to your preferences based on the explicit feedback given by the you(the user).
 
-## **Characteristics of these 5 five article's**
+## **Characteristics of these 5 five articles**
 
-Article's are divided based on two factors freshness and similarity
+Articles are divided based on two factors freshness and similarity
 
 **Freshness** : 
 
@@ -50,9 +50,9 @@ Article's are divided based on two factors freshness and similarity
 
 **Similarity:**  
 
-- Based on the user feedback of article's they've likes we have 
+- Based on the articles user liked in the past, there are two types
 
-- - **Parallel articles** 
+- - **Parallel Articles** 
   - **Perpendicular Articles** 
 
 - Parallel articles are the one's which are most similar to the articles you have liked
@@ -100,7 +100,7 @@ Following are the distribution of number of articles over the categories
 
  
 
-5. If you come across an article which you liked reading(it can be from the feed sent to you  or anywhere on the internet) and would want your feed to reflect this type of articles then you can add the link to “favored” channel on slack(sounds like quite a hassle to open slack and paste url but Android makes it pretty handy )
+5. If you come across an article which you liked reading and would want your feed to reflect this type of articles(it can be from the feed sent to you  or anywhere on the internet) then you can add the link to “favored” channel on slack(sounds like quite a hassle to open slack and paste url but Android makes it pretty handy )
 
 ![img](https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905080083_pjimage.jpg)
 
@@ -134,7 +134,7 @@ There are 4 components of our system
 
 ## Recommendation Engine
 
-- The underlining concept used resembles Content Based Filtering, thought it can be considered hybrid approach
+- The underlining concept used resembles Content Based Filtering, though it can be considered hybrid approach
 
 - Each article scrapped is assigned a score, This score is a weighted average of multiple - signals(Semantic similarity and  number of claps ,responses combined ) which indicates how likely you would find the article interesting(readable)
 
@@ -144,7 +144,7 @@ There are 4 components of our system
 
 - Responses which are same as comments(as we know it)
 
-**Both the number of claps and responses are Scaled using MinaxScaler to range between 0 to 1 and are combined with 50% contribution of each**
+**Both the number of claps and responses are Scaled using MinaxScaler to have arange between 0 to 1 and are combined with 50%/0.5 weight of each**
 
 ```
 ClapRespScore = (total_claps_scaled*0.5 + total_responses_scaled*0.5)
