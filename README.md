@@ -144,10 +144,10 @@ There are 4 components of our system
 
 - Responses which are same as comments(as we know it)
 
-**Both the number of claps and responses are Scaled using MinaxScaler to have arange between 0 to 1 and are combined with 50%/0.5 weight of each**
+**Both the number of claps and responses are Scaled using MinaxScaler to have arange between 0 to 1 and are combined with weight of 70% for claps and 30% for coments**
 
 ```
-ClapRespScore = (total_claps_scaled*0.5 + total_responses_scaled*0.5)
+ClapRespScore = (total_claps_scaled*0.7 + total_responses_scaled*0.3)
 ```
 
 **Semantic Similarity** 
