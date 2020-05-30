@@ -31,7 +31,7 @@ This  project is an attempt addressing this.
 
 **SmartFeed.ai** is a Article  Recommendation System, Which serves you everyday with a collection of Article's related to Topics you have subscribed,(5 Articles per topic).
 
-The way it comes up with those 5 articles with the objective to ensure to keep you reading feed interesting and worthwhile by aligning them to your preferences based on the explicit feedback given by the you(the user).
+The way it comes up with those 5 articles is with the objective too ensure keeping you reading feed interesting and worthwhile by aligning them to your preferences based on the explicit feedback given by the you(the user).
 
 ## **Characteristics of these 5 five article's**
 
