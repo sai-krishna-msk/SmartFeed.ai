@@ -64,10 +64,11 @@ If you're wondering about the names(parallel and perpendicular), They have to do
 Following are the distribution of the number of articles over the categories 
 
 ```
-|   | parallel | perpendicular |
+|          | parallel | perpendicular |
 |----------|----------|---------------|
-| Archive  | 1  | 1   |
-| Daily  | 2  | 1   |
+| Archive  | 1        | 1             |
+| Daily    | 2        | 1             |
+
 ```
 
 **Note** The reason we have a concept of perpendicular articles is to introduce novelty or diversify our exposure to different topics, failing to do so may lead to an echo chamber of preference.
