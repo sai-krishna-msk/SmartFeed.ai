@@ -35,7 +35,7 @@ This project is an attempt to address it.
 
 The way it comes up with those 5 articles is with the objective to ensure keeping you reading feed interesting and worthwhile by aligning them to your preferences based on the explicit feedback given by you(the user).
 
-## **Characteristics of these 5 five articles**
+## **Characteristics of the selected 5 five articles**
 
 Articles are divided based on two factors freshness and similarity
 
