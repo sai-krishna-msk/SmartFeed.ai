@@ -8,7 +8,7 @@
 
 - [Problem Statement](#problem-statement)
 - [Introduction](#introduction)
-- [How to use Platform](#how-to-use)
+- [How to use the Service](#how-to-use-the-service)
 - [Methodology](#methodology)
 - [Navigating Code](#navigating-code)
 - [Further Improvements](#further-improvements)
@@ -17,7 +17,7 @@
 
 # **Problem Statement**
 
-*Scarcity of information is as bad as Excess of it* 
+*Scarcity of information is equally bad as Excess of it* 
 
  Sheer Volume of newsletters which flood our inboxes overwhelms us into not sticking with the habit of reading
 
@@ -77,7 +77,7 @@ Following are the distribution of the number of articles over the categories
 
 <hr>
 
-# **How to use Platform**
+# **How to use the Service**
 
 1. Signup to smartfeed.ai [here](https://smartfeed-ai.herokuapp.com/signup)
 
