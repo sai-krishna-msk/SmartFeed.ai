@@ -6,6 +6,7 @@
 - **How to use the Service**
 - **Components**
 - **Recommendation Engine Implementation**
+- **Navigating Code**
 - **Further Improvements**
 
 <hr>
@@ -186,25 +187,6 @@ Perpend_Article_rank = (1-cosin_sim))*0.8+ClapRespScore*0.2
 
 <hr>
 
-# **Further Improvements**
-
-- Currently, Articles are being scraped only from medium, In future other regularly updated RSS feeds can be added
-
-- Pipeline can be built which periodically analyzes user logs and mines some sought of patterns and trends
-
-- Given sufficiently large users 
-	- based on the logs user's can be clustered and we can use the preferences of  median of each cluster for their respective cluster's recommendations
-	-  Collaborative filtering also could be implemented
-
-- User conversations on slack channels can be monitored and used in making recommendations(with consent)
-
-- User Dashboard can be embedded into Web-App summarizing user favored feeds periodically (monthly or weekly)
-
-- Instead of just using explicit feedback in form of article URL's, user can be allowed to post other form of content(You-tube Search history or web search history) from which latent features can be extracted and transformed to our vector space to enhance recommendations
-
-- Apart from the accuracy of our LDA model we can track the emails sent to the user to identify his/her relative user interaction with recommended articles, this could be a good KPI(key performance indicator)
-
-
 # Navigating Code
 
 On higher-level chronological order to replicate the workflow reflects the chronology of the Directories
@@ -246,4 +228,25 @@ Archive Articles are scrapped, trained once before deploying the model (updated 
 - 4_FlaskApp: Consists of Web interface for users to singnup and subscribe to topics of choice
 
 <hr>
+
+
+# **Further Improvements**
+
+- Currently, Articles are being scraped only from medium, In future other regularly updated RSS feeds can be added
+
+- Pipeline can be built which periodically analyzes user logs and mines some sought of patterns and trends
+
+- Given sufficiently large users 
+	- based on the logs user's can be clustered and we can use the preferences of  median of each cluster for their respective cluster's recommendations
+	-  Collaborative filtering also could be implemented
+
+- User conversations on slack channels can be monitored and used in making recommendations(with consent)
+
+- User Dashboard can be embedded into Web-App summarizing user favored feeds periodically (monthly or weekly)
+
+- Instead of just using explicit feedback in form of article URL's, user can be allowed to post other form of content(You-tube Search history or web search history) from which latent features can be extracted and transformed to our vector space to enhance recommendations
+
+- Apart from the accuracy of our LDA model we can track the emails sent to the user to identify his/her relative user interaction with recommended articles, this could be a good KPI(key performance indicator)
+
+
 
