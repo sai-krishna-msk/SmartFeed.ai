@@ -1,109 +1,52 @@
 <img src="images/logo-2.png">
 
-# **SmartFeed.ai**
-
- *[Content Recommendation System](https://smartfeed-ai.herokuapp.com/)*
-
-# **Contents**
-
-- [Problem Statement](#problem-statement)
-- [Introduction](#introduction)
-- [How to use the Service](#how-to-use-the-service)
-- [Methodology](#methodology)
-- [Navigating Code](#navigating-code)
-- [Further Improvements](#further-improvements)
+# Contents
+- **Problem Statement**
+- **Introduction**
+- **How to use the Service**
+- **Components**
+- **Recommendation Engine Implementation**
+- **Further Improvements**
 
 <hr>
 
-# **Problem Statement**
+# Problem Statement
+Scarcity of information is equally  bad as Excess of it
 
-*Scarcity of information is equally bad as Excess of it* 
+Sheer Volume of newsletters which flood our inboxes overwhelms us into not sticking with the habit of reading
 
- Sheer Volume of newsletters which flood our inboxes overwhelms us into not sticking with the habit of reading
-
- 
-
-Though there are implicit feedback mechanism on Reading Website Which based on your read-time and others interaction  filter out personalized content for you, Wouldn't it be nice to have ubiquitous service/platform where we can explicitly tell a service the type of content their recommendations for us should reflect and have these delivered the very next day
+Though there are implicit feedback mechanism on Reading Website Which based on your read-time and others interaction filter out personalized content for you, Wouldn't it be nice to have ubiquitous service/platform where we can explicitly tell a service the type of content their recommendations for us should reflect and have these delivered the very next day
 
 This project is an attempt to address it.
 
 <hr>
 
-# **Introduction** 
-
-**SmartFeed.ai** is an Article Recommendation System, which serves you every day with a collection of articles related to topics you have subscribed,(5 Articles per topic).
-
-The way it comes up with those 5 articles is with the objective to ensure keeping you reading feed interesting and worthwhile by aligning them to your preferences based on the explicit feedback given by you(the user).
-
-## **Characteristics of the selected 5 five articles**
-
-Articles are divided based on two factors freshness and similarity
-
-**Freshness** : 
-
-- There are two categories of articles you get for each tag/topic
-
-- -  Archive edition
-  - Daily-edition 
-
-- Archive Edition is a collection of all articles for a tag from the past two years
-
-- Daily Edition is a collection of articles for a tag from the previous day
-
-**Similarity:**  
-
-- Based on the articles user liked in the past, there are two types
-
-- - **Parallel Articles** 
-  - **Perpendicular Articles** 
-
-- Parallel articles are the one's which are most similar to the articles you have liked
-
-- Perpendicular articles are the one's which are most dissimilar articles(Topic wise) from which you have liked
-
-If you're wondering about the names(parallel and perpendicular), They have to do with the fact that similarity is being calculated based on the cosine angle between the feature vectors of the articles(You can find out more about technicalities in the methodology section)
-
-Following are the distribution of the number of articles over the categories 
-
-```
-|          | parallel | perpendicular |
-|----------|----------|---------------|
-| Archive  | 1        | 1             |
-| Daily    | 2        | 1             |
-
-```
-
-**Note** The reason we have a concept of perpendicular articles is to introduce novelty or diversify our exposure to different topics, failing to do so may lead to an echo chamber of preference.
+# Introduction
+SmartFeed serves users every day with a collection of articles related to topics you have subscribed,(5 Articles per topic),  with the objective to ensure keeping you reading feed interesting and worthwhile by aligning them to user preferences based on the explicit feedback given.
 
 <hr>
 
-# **How to use the Service**
 
+	 
+# How to use the Service
 1. Signup to smartfeed.ai [here](https://smartfeed-ai.herokuapp.com/signup)
 
    
 
-1. Subscribe to the topics,(*Highly recommended to limit it to no more than 3 Topics ,as more than 15 articles a day just feels overwhelming*)
+2. Subscribe to the topics,(*Highly recommended to limit it to no more than 3 Topics ,as more than 15 articles a day just feels overwhelming*)
 
    
 
-1. You would be receiving an email with an invitation to join the slack channel(make sure to use the same username used to subscribe), This is the medium chosen to get explicit feedback from you(the user)
-
+3. You would be receiving an email with an invitation to join the slack channel(make sure to use the same username used to subscribe), This is the medium chosen to get explicit feedback from you(the user)
 ![img](https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905059089_rsz_slack_subs.jpg)
 
 
 
-4. Every day you would be receiving your feed as an email in and around 6:30(IST) in the morning from [smartfeed.ai@gmail.com](mailto:smartfeed.ai@gmail.com), which will have your feed of the day
+4. Every day you would be receiving your feed as an email in and around 6:30(IST) in the morning from [smartfeed.ai@gmail.com](mailto:smartfeed.ai@gmail.com), which will have your feed of the day, a  300-word Summary and keywords of the corresponding article are intended to assist you in deciding whether to open the article or skip it
 
 ![img](https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905071506_rsz_email.jpg)
 
-300-word Summary and keywords of the corresponding article are intended to assist you in deciding whether to open the article or skip it
-
- 
-
- 
-
-5. If you come across an article which you liked reading and would want your feed to reflect this type of articles(it can be from the feed sent to you  or anywhere on the internet) then you can add the link to “favored” channel on slack(sounds like quite a hassle to open slack and paste URL but Android makes it pretty handy )
+- If you happen to come across an article which you liked reading and would want your feed to reflect this type of articles(it can be from the feed sent to you  or anywhere on the internet) then you can add the link to “favored” channel on slack(sounds like quite a hassle to open slack and paste URL but Android makes it pretty handy )
 
 ![img](https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905080083_pjimage.jpg)
 
@@ -111,49 +54,96 @@ Anywhere in your phone given slack is downloaded share option can be accessed  f
 
 <hr>
 
-# Methodology
+# Components
+There are 5 components of the system
 
-There are 4 components of our system
+* Flask Web-APP 
 
-- **Scrapping Bot**
+    * For users to signup and subscribe to related topics
 
-- **Slack Bot**
+* Slack Bot 
 
-- **Recommendation Engine**
+    * To collect user feedback and push it to the database
 
-- **Flask Web-app**
+* Scraper 
 
-- **Firebase real-time database**
+    * which scrapes medium articles every day for each tag 
 
-## Scrapping Bot
+* Recommendation Engine
 
-- A bot which scrapes articles every day for each tag/topic given to it
+	*  It assigns a score for each article scraped and generates 
+    recommendations based on these scores(Detailed procedure is mentioned below)
 
-## Slack Bot
+* Feed Sender 
 
-- There are specific Channels in slack Assigned for User Feedback named favoured and unfavoured
+     * which sends the recommendations generated for each 
+   user to their respective emails 
+	 
 
-- Dumping Links in either of those would forward these articles to the database with a timestamp of dump and user who did so
+<hr>
 
-## Recommendation Engine
 
-- The underlining concept used resembles Content-Based Filtering, though it can be considered a hybrid approach
+# Recommendation Engine Implementation
+5 Articles being sent to users are simple not just the Top-5 most similar articles user liked in the past, They have the following characteristics
 
-- Each article scrapped is assigned a score, This score is a weighted average of multiple - signals(Semantic similarity and  number of claps ,responses combined ) which indicates how likely you would find the article interesting(readable)
+Articles are divided based on two factors freshness and similarity
+
+**Freshness** : 
+
+There are two categories of articles you get for each tag/topic
+
+- Archive edition, Its a collection of all articles for a tag from the past two years
+
+- Daily-edition, its a  is a collection of articles for a tag from the previous day
+
+**Similarity**  
+
+Based on the articles user liked in the past, there are two types
+
+- **Parallel Articles** :  These  articles are the one's which are most similar to the articles you have liked
+
+- **Perpendicular Articles** : These articles are the one's which are most dissimilar articles(Topic wise) from which you have liked
+
+
+Following are the distribution of the number of articles over the categories 
+
+**Archive Edition: 2 articles**
+
+- 1 Parallel article
+- 1 Perpendicular article
+
+**Daily Edition: 3 articles**
+
+- 2 Parallel article
+- 1 Perpendicular article
+
+<br>
+
+
+
+**Note** The reason the  concept of perpendicular articles exists is to introduce novelty or diversify our exposure to different topics, failing to do so may lead to an echo chamber of preference.
+
+<br>
+
+**The underlining concept used resembles Content-Based Filtering, though it can be considered a hybrid approach**
+
+Each article scrapped is assigned a score, This score is a weighted average of multiple - signals(Semantic similarity and  number of claps ,responses combined ) which indicates how likely user would find the article interesting(readable)
 
 **Claps and responses**
 
-- In medium Claps are similar to likes with one radical difference which is each user can clap as many times as he/she wants, Which makes it an unreliable as metric to measure popularity because of the pay model of medium to their writers (more about this [here](https://help.medium.com/hc/en-us/articles/213477928-Medium-Rules))
+- In medium Claps are similar to likes with one major difference, Each user can clap as many times as he/she wants, Which makes it an unreliable as metric to measure popularity because of the pay model of medium to their writers (more about this [here](https://help.medium.com/hc/en-us/articles/213477928-Medium-Rules))
 
-- Responses which are same as comments(as we know it)
+- Responses which are same as comments(as we know it on other platforms)
 
-**Both the number of claps and responses are Scaled using MinaxScaler to have a range between 0 to 1 and are combined with a weight of 70% for claps and 30% for comments**
+Both the number of claps and responses are Scaled using MinaxScaler to have a range between 0 to 1 and are combined with a weight of 70% for claps and 30% for comments and the resultant score is called ClapRespScore indicating the popularity of the article
 
 ```
 ClapRespScore = (total_claps_scaled*0.7 + total_responses_scaled*0.3)
 ```
 
-**Semantic Similarity** 
+<br>
+
+**Topic Similarity** 
 
 LDA(Latent Dirichlet Allocation) has been used to extract features from the article
 
@@ -165,7 +155,12 @@ LDA(Latent Dirichlet Allocation) has been used to extract features from the arti
 
 - Cosine Distance is being calculated between the articles to determine their similarity(Though there are other measures such as Nearest Neighbors which uses Euclidean distance. but for our use case of also getting topics which are completely unrelated(perpendicular articles as we call them) cosine would make a lot more sense mathematically)
 
-**Combining Cosine similarity with ClapRespScore**
+<br>
+
+#### **Combining Cosine similarity(Topic similarity) with ClapRespScore(Popularity Score)**
+
+<br>
+
 
 **For** **Calculating** **Parallel Articles** (ie: Most similar articles), 
 
@@ -174,6 +169,8 @@ LDA(Latent Dirichlet Allocation) has been used to extract features from the arti
 ```
 Parallel_Article_rank = cosin_sim*0.8+ClapRespScore*0.2
 ```
+
+<br>
 
 **For Calculating Perpendicular Articles** **(Most** **Dissimilar)**
 
@@ -187,20 +184,26 @@ Parallel_Article_rank = cosin_sim*0.8+ClapRespScore*0.2
 Perpend_Article_rank = (1-cosin_sim))*0.8+ClapRespScore*0.2
 ```
 
-## Flask-Web-App
-
-- Acts as an interface allowing users to subscribe, unsubscribe to the topic/tags
-
-## Firebase Real-time DB
-
-- Its the easiest to use and setup NO-SQL Cloud-based Database, Which is being used for
-- Authentication 
-- Storing User details
-- Store User subscriptions, 
-- Store Feedback from users 
-- log of articles being sent to the user each day(for further analysis)
-
 <hr>
+
+# **Further Improvements**
+
+- Currently, Articles are being scraped only from medium, In future other regularly updated RSS feeds can be added
+
+- Pipeline can be built which periodically analyzes user logs and mines some sought of patterns and trends
+
+- Given sufficiently large users 
+	- based on the logs user's can be clustered and we can use the preferences of  median of each cluster for their respective cluster's recommendations
+	-  Collaborative filtering also could be implemented
+
+- User conversations on slack channels can be monitored and used in making recommendations(with consent)
+
+- User Dashboard can be embedded into Web-App summarizing user favored feeds periodically (monthly or weekly)
+
+- Instead of just using explicit feedback in form of article URL's, user can be allowed to post other form of content(You-tube Search history or web search history) from which latent features can be extracted and transformed to our vector space to enhance recommendations
+
+- Apart from the accuracy of our LDA model we can track the emails sent to the user to identify his/her relative user interaction with recommended articles, this could be a good KPI(key performance indicator)
+
 
 # Navigating Code
 
@@ -244,23 +247,3 @@ Archive Articles are scrapped, trained once before deploying the model (updated 
 
 <hr>
 
-# **Further Improvements**
-
-- Currently, Articles are being scraped only from medium, In future other regularly updated RSS feeds can be added
-
-- Pipeline can be built which periodically analyzes user logs and mines some sought of patterns and trends
-
-- Given sufficiently large users 
-
-- - based on the logs user's can be clustered and we can use the preferences of  median of each cluster for their respective cluster's recommendations
-  - Collaborative filtering also could be implemented
-
-- User conversations on slack channels can be monitored and used in making recommendations(with consent)
-
-- User Dashboard can be embedded into Web-App summarizing user favored feeds periodically (monthly or weekly)
-
-- Instead of just using explicit feedback in form of article URL's, user can be allowed to post other form of content(You-tube Search history or web search history) from which latent features can be extracted and transformed to our vector space to enhance recommendations
-
-- Apart from the accuracy of our LDA model we can track the emails sent to the user to identify his/her relative user interaction with recommended articles, this could be a good KPI(key performance indicator)
-
-<hr>
