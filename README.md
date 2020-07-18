@@ -30,7 +30,7 @@ SmartFeed serves users every day with a collection of articles related to topics
 
 	 
 # How to use the Service
-1. Signup to smartfeed.ai [here](https://smartfeed-ai.herokuapp.com/signup)
+1. Signup to smartfeed.ai [here](https://smartfeedai.herokuapp.com/)
 
    
 
