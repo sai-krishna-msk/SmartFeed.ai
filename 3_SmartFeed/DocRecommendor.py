@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd 
 import warnings
 from LDAModel import LDAModel
-from ArticleParser import ArticleParser
-from utils import getLogger
+from ArticleParser import ArticleParser, article_verifier
+from utils import getLogger, fetch_csv, push_csv
 from scipy import spatial
 
 logger = getLogger("Doc2VecReccomendor")
@@ -102,6 +102,21 @@ class DocRecommender:
         return np.inner(curr_vector, comp_vector)
 
 
+    def get_top_n(self, top_articles_dict, col='score', n=1):
+        top_articles_df = pd.DataFrame.from_dict(top_articles_dict).sort_values(by=col, ascending=False).reset_index().drop('index', axis=1)
+        cnt = 0
+        i=0
+        select_ids = []
+
+        while(cnt==n):
+            
+            if(article_verifier(top_articles_df.iloc[i]["link"].values[0] ) ):
+                select_ids.append(i)
+                cnt+=1
+            i+=1
+
+        return top_articles_df.iloc[select_ids]
+
 
 
     def get_parallel(self, feature_matrix, simm_scores, n=1):
@@ -114,7 +129,10 @@ class DocRecommender:
             top_articles["blog_score"].append(score)
             top_articles["score"].append( (1*score)+(0*ClapRespScore) )
 
-        return pd.DataFrame.from_dict(top_articles).nlargest(n, 'score')
+
+        return self.get_top_n(top_articles)
+
+        # return pd.DataFrame.from_dict(top_articles).nlargest(n, 'score')
 
     def get_perpendicular(self, feature_matrix, simm_scores, n=1):
         """For Given list of article's cosine simmilarities, combines it with their popularity score and returns top n articles whose
@@ -127,7 +145,10 @@ class DocRecommender:
             top_articles["blog_score"].append(perp_score)
             top_articles["score"].append( (1*perp_score) + (0*ClapRespScore)  )
 
-        return pd.DataFrame.from_dict(top_articles).nlargest(n, 'score')
+
+        return self.get_top_n(top_articles)
+
+        # return pd.DataFrame.from_dict(top_articles).nlargest(n, 'score')
 
     # def get_opposite(self, feature_matrix, simm_scores, n=1):
     #     """For Given list of article's cosine simmilarities, combines it with their popularity score and returns top n articles whose
@@ -158,25 +179,31 @@ class DocRecommender:
         """ 
         Update which articles have been sent out to user Check is user exist if yes then put one at article which  has been sent, If user does not exist then create a new user
         """
-        feature_matrix = pd.read_csv(f"feature_matrices/{tag}.csv")
+        print("\n")
+        print(f"User being processed is: {user}")
+        feature_matrix =  fetch_csv(f"/feature_matrices/{tag}.csv")
 
         if(user not in feature_matrix.columns):
 
             feature_matrix[user] = feature_matrix["link"].apply(lambda x: 1 if( x in self.archive_log["link"]) else 0)
 
         else:
+            print("Entered the overwrite loop")
             feature_matrix[user] = feature_matrix.apply(lambda row: 1 if( row.link in self.archive_log["link"] ) else row[user], axis=1  )
             
-        feature_matrix.to_csv(f"feature_matrices/{tag}.csv", index=False)
+        push_csv(feature_matrix, f"/feature_matrices/{tag}.csv")
 
     def _getArchiveFeatureMatrix(self, user, tag):
         """
         return the list of archive links of a tag, excluding links already sent
         """
        
-        feature_matrix = pd.read_csv(f"feature_matrices/{tag}.csv")
+        feature_matrix = fetch_csv(f"/feature_matrices/{tag}.csv")
+
+
 
         if(user in feature_matrix.columns.values):
+
 
            
             feature_matrix = feature_matrix[feature_matrix[user]==0]
