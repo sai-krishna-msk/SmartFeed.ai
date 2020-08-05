@@ -97,16 +97,19 @@ Articles have two primary attributes based on which they are included in the rec
 - **Daily Edition** its a collection of articles for a tag scrapped from medium the previous day.
 
 <br>
+
 **Similarity** This attribute also has two values/types, Based on the articles user liked in the past, there are two types(Details as to how this is calculated is presented in the next section
 - **Parallel Articles** These articles are the one's which are most similar to the articles user liked in the past.
 - **Perpendicular Articles** These articles are the one's which are most dissimilar articles(Topic wise) from which the user has liked in the past.
 
 <br>
+
 Following is the distribution of the number of articles over the categories
 
 **Archive Edition: 2 articles**
 - 1 Parallel article
 - 1 Perpendicular article
+
 
 **Daily Edition: 3 articles**
 - 2 Parallel article
