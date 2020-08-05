@@ -29,6 +29,7 @@ SmartFeed.ai serves you every day with a collection of 5 articles related to top
 <hr>
 
 
+
 # Components
 
 There are 3 main components of the system
@@ -52,27 +53,26 @@ A pipeline which Coordinates and Manages three integral components of the system
 - Subscription to slack is done during the signup process to the service.
 - The slack workspace consists of favoured and unfavoured channels, where users can dump the links of the articles they've liked and the type of content you would want your feed to reflect.
 - When a user pasts a link in the channel, the bot is triggered and the respective link along with the username of the user are written to the DB.
+<hr>
 
 
 	 
 # How to use the Service
 1. Signup to smartfeed.ai [here](https://smartfeed-ai.herokuapp.com/)
 
-   
 
 2.You would be receiving an email with an invitation to join the slack channel(make sure to use the same username used to subscribe).
 
 ![img](https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905059089_rsz_slack_subs.jpg)
 
-   
 
 3. Subscribe to the topics of choice,(highly recommended to limit it to no more than 3 Topics, as more than 15 articles a day just feels overwhelming).
-
 
 
 4.Every day you would be receiving your feed as an email in and around 6:30(IST) in the morning from smartfeed.ai@gmail.com, which will have your feed of the day, a 300-word summary and keywords of the corresponding article, Which are intended to assist you in deciding whether to even consider opening the article or skip it.
 
 ![img](https://paper-attachments.dropbox.com/s_C44986F842155EEDF9274ADEA66CC474C9EBFA55B5A44BC9DDB17C60F799EA88_1589905071506_rsz_email.jpg)
+
 
 5. If you happen to come across an article which you liked reading and would want your feed to reflect(source of the article can be from the feed sent to you or anywhere on the internet) then you can add the link to "favoured" channel on slack(sounds like quite a hassle to open slack and paste URL but Mobile OS makes it pretty handy ).
 
@@ -80,6 +80,7 @@ A pipeline which Coordinates and Manages three integral components of the system
 
 Anywhere in your phone given slack is downloaded share option can be accessed.
 <hr>
+
 
 
 # Recommendation Engine Implementation
@@ -90,15 +91,17 @@ A collection of articles being recommended per topic is simply not the top-5 art
 
 Articles have two primary attributes based on which they are included in the recommendations "Freshness" and "Similarity".
 
+
 **Freshness** This attribute has two values/types
 - **Archive Edition** its a collection of top articles for a tag from the past two years.
 - **Daily Edition** its a collection of articles for a tag scrapped from medium the previous day.
 
+<br>
 **Similarity** This attribute also has two values/types, Based on the articles user liked in the past, there are two types(Details as to how this is calculated is presented in the next section
 - **Parallel Articles** These articles are the one's which are most similar to the articles user liked in the past.
 - **Perpendicular Articles** These articles are the one's which are most dissimilar articles(Topic wise) from which the user has liked in the past.
 
-
+<br>
 Following is the distribution of the number of articles over the categories
 
 **Archive Edition: 2 articles**
@@ -111,8 +114,10 @@ Following is the distribution of the number of articles over the categories
 
 **Total of 5 articles per tag**
 
+
 **Note** Reason the concept of perpendicular articles exists is to introduce novelty or diversify our exposure to different types of contents(in the same topic), failing to do so may lead to an echo chamber of preference.
 <hr>
+
 
 # Similarity Metric Design
 
@@ -130,6 +135,8 @@ Both the number of claps and responses are scaled using MinaxScaler to have a ra
 
 ```ClapRespScore = (total_claps_scaled*0.7 + total_responses_scaled*0.3)```
 
+<br>
+
 **Cosine Similarity**
 
 To use any distance metric, we need to convert articles(which is in textual form) to Feature Vectors(numerical form).
@@ -142,16 +149,22 @@ LDA(Latent Dirichlet Allocation) is being used to get extract or transform an ar
 
 Cosine Distance is being calculated between the articles to determine their similarity(though there are other measures such as 'Nearest Neighbors' but for this use-case which requires us to compute articles which are unrelated (perpendicular articles) cosine would be mathematically intuitive.
 
+<br>
+
 **Combining Similarity and popularity score**
 
 As mentioned in Recommendation engine design section, articles can be divided into two types based on the similarity metrics, Parallel and perpendicular.
 
 Following are the ways used to compute parallel and perpendicular articles
 
+<br>
+
 **For Calculating Parallel Articles (ie: Most similar articles),**
 - To obtain the most similar articles to the user's feedback, Following is the combination used
 
 ```Parallel_Article_rank = cosin_simmilarity*0.8+ClapRespScore*0.2```
+
+<br>
 
 **For Calculating Perpendicular Articles (Most Dissimilar)**
 - Our objective is to get articles that are completely dissimilar from the one's user liked, For this, we can find an article whose feature vector is perpendicular to the one's user has liked.
@@ -160,6 +173,7 @@ Following are the ways used to compute parallel and perpendicular articles
 
 ```Perpend_Article_rank = (1-cosin_simmilarity))*0.8+ClapRespScore*0.2```
 <hr>
+
 
 
 # Navigating Code
