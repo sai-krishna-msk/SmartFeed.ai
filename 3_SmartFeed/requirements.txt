@@ -22,7 +22,7 @@ Pillow==7.1.2
 protobuf==3.12.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-pycryptodome==3.4.3
+pycryptodome==3.6.6
 Pyrebase==3.0.27
 python-dateutil==2.8.1
 python-http-client==3.2.7
