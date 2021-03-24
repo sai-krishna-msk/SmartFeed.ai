@@ -33,7 +33,7 @@ regex==2020.5.14
 requests==2.11.1
 requests-file==1.5.1
 requests-toolbelt==0.7.0
-rsa==4.0
+rsa==4.1
 schedule==0.6.0
 scikit-learn==0.23.1
 scipy==1.4.1
