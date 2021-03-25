@@ -125,7 +125,7 @@ python-jwt==2.0.1
 pytz==2020.1
 pywin32==227
 pywinpty==0.5.7
-PyYAML==5.3.1
+PyYAML==5.4
 pyzmq==19.0.1
 rake-nltk==1.0.4
 readability-lxml==0.7.1
