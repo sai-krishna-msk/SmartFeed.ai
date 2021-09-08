@@ -18,7 +18,7 @@ nltk==3.5
 numpy==1.18.4
 oauth2client==3.0.0
 pandas==1.0.3
-Pillow==7.1.2
+Pillow==8.3.2
 protobuf==3.12.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8

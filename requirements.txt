@@ -102,7 +102,7 @@ pandas==1.0.3
 pandocfilters==1.4.2
 parso==0.7.0
 pickleshare==0.7.5
-Pillow==7.1.2
+Pillow==8.3.2
 ply==3.11
 pocket-api==0.1.5
 prometheus-client==0.7.1
